@@ -1,0 +1,66 @@
+train_config:
+  encoder_t_step_upper: 10
+  recon_branch: true
+  temperature: 1.0
+  threshold_selfsim: 0.8
+  threshold_selfsim_metrics: 0.95
+  beta: 0.01
+  loss_weight:
+    data_mse: 1.0
+    latent: 0.5
+    kl: 0.0
+    contrastive: 0.0
+    csp: 0.0
+    sr: 1.0
+    sub_weight:
+      gen: 1.0
+      rec: 1.0
+      m-m_mse: 1.0
+model_config:
+  text_encoder:
+    nfeats: 768
+    vae: false
+    latent_dim: 256
+    ff_size: 1024
+    num_layers: 6
+    num_heads: 4
+    dropout: 0.0
+    activation: gelu
+    double_token: false
+  motion_encoder:
+    nfeats: 263
+    vae: false
+    latent_dim: 256
+    ff_size: 1024
+    num_layers: 6
+    num_heads: 4
+    dropout: 0.0
+    activation: gelu
+    double_token: false
+  decoder:
+    vae: false
+    cond_mode: add
+    cond_type:
+    - z
+  ram:
+    vae: false
+    fact: 1.0
+    use_motion_encoder: true
+    share_weight: false
+    encoder_stop_step: 999999999
+diffusion_config:
+  version: gaussion_diffusion
+  beta_schedule: squaredcos_cap_v2
+  prediction_type: sample
+  diffusion_steps: 50
+data_config:
+  dataset: HumanML3D
+  path: dataset/HumanML3D
+  text_to_token_emb:
+    path: dataset/HumanML3D
+    modelname: distilbert-base-uncased
+    preload: true
+  text_to_sent_emb:
+    path: dataset/HumanML3D
+    modelname: sentence-transformers/all-mpnet-base-v2
+    preload: true

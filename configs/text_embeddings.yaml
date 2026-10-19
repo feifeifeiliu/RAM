@@ -1,0 +1,14 @@
+device: cuda
+
+text_to_token_emb:
+  _target_: src.data.text.TokenEmbeddings
+  path: dataset/KIT-ML
+  modelname: distilbert-base-uncased
+  # modelname: FacebookAI/roberta-base
+  preload: true
+
+text_to_sent_emb:
+  _target_: src.data.text.SentenceEmbeddings
+  path: dataset/KIT-ML
+  modelname: sentence-transformers/all-mpnet-base-v2
+  preload: true

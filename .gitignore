@@ -1,0 +1,23 @@
+# Large data & pretrained assets — obtain from the MDM repo (see README)
+/dataset
+/glove
+/body_models
+/t2m
+/kit
+/assets
+
+# Checkpoints & run outputs (model weights are distributed via ModelScope)
+/save
+/repro_ckpt/
+*.log
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# editor / os
+.vscode/
+.idea/
+.DS_Store

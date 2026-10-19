@@ -1,0 +1,51 @@
+dpmsolver:
+  scheduler_class: DPMSolverMultistepScheduler
+  additional_params:
+    algorithm_type: sde-dpmsolver++
+    
+    solver_order: 2 # 2: default, 3: 变差一点, 1: 变差一点
+    thresholding: false # 爆炸，完全不适合
+    dynamic_thresholding_ratio: 0.995
+    solver_type: midpoint
+    lower_order_final: True
+    euler_at_final: False # 完全没影响
+    use_karras_sigmas: false # 变差一点
+    use_exponential_sigmas: false # 变差一点
+    use_beta_sigmas: false # 差爆炸了
+    use_lu_lambdas: false # 变差一点
+    use_flow_sigmas: false # 变差很多
+    final_sigmas_type: zero  # "zero": default, "sigma_min": 变差一点点
+    timestep_spacing: linspace # "linspace": default, "leading": 差到爆炸, "trailing": 变差一点点
+    rescale_betas_zero_snr: false # 几乎没影响
+
+edpmsolver:
+  scheduler_class: EDMDPMSolverMultistepScheduler
+  additional_params:
+    algorithm_type: sde-dpmsolver++
+    # use_karras_sigmas: true
+ddpm:
+  scheduler_class: DDPMScheduler
+  additional_params:
+    variance_type: fixed_large
+    timestep_spacing: linspace
+    clip_sample: false
+    
+    # rescale_betas_zero_snr: true
+    # thresholding: true
+    # prediction_type: sample
+
+ddim:
+  scheduler_class: DDIMScheduler
+  additional_params:
+    clip_sample: false
+
+deis:
+  scheduler_class: DEISMultistepScheduler
+  additional_params:
+    num_train_timesteps: 1000
+    # use_karras_sigmas: true
+
+pndm:
+  scheduler_class: PNDMScheduler
+  additional_params:
+    num_train_timesteps: 1000
